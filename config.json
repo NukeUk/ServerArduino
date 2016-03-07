@@ -1,0 +1,7 @@
+{
+  "port" : 3300,
+  "mongoose" : {
+    "uri" : "mongodb://95.28.93.215:24014/sensors"
+  }
+
+}
