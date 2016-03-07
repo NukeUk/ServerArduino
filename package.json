@@ -1,12 +1,14 @@
 {
-  "name": "serversrduino",
-  "version": "0.0.1",
-  "description": "web service for data transfer to db",
+  "name": "serverarduino",
+  "version": "0.0.2",
+  "description": "pet arduino project",
   "main": "Server.js",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "nconf": "^0.8.4",
+    "mongoose": "^4.4.6",
     "express": "^4.13.4",
-    "mongojs": "^2.3.0"
+    "winston": "^2.2.0"
   },
   "devDependencies": {},
   "scripts": {
