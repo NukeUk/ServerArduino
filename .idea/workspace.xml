@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48e6c2a8-70d0-44b9-a32b-f9fdf71ff810" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ServerArduino_node_modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server.js" afterPath="$PROJECT_DIR$/Server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.json" afterPath="$PROJECT_DIR$/config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/mongoose.js" afterPath="$PROJECT_DIR$/libs/mongoose.js" />
     </list>
     <ignored path="ServerArduino.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -349,7 +345,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457358026359</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="adding GRUD get and post sensor data">
+      <created>1457361036358</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1457361036358</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -397,7 +399,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding GRUD initial state" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding GRUD initial state" />
+    <MESSAGE value="adding GRUD get and post sensor data" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding GRUD get and post sensor data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
