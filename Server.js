@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var log = require('./libs/log')(module);
 var config = require('./libs/config');
+var SensorsModel = require('./libs/mongoose').WeatherModel;
+
 
 //var mongo = require('mongojs');
 
@@ -22,34 +24,49 @@ app.get('/api', function(req, res){
 
 });
 
-//обработка ошибок
-app.use(function(req, res,next){
-   res.status(404);
-    log.debug('Not found url: %s', req.url);
-    res.send({error: 'Not found'});
-    return;
 
-});
-
-app.use(function(err, req, res,next){
-    res.status(err.status || 500);
-    log.error('Internal error(%d): %s', res.statusCode, err.message);
-    res.send({error: err.message});
-    return;
-});
-
-app.get('ErrorExample', function(req, res, next){
-   next(new Error('Random error'));
-});
-// конец обработки ошибок
 
 // собственно API
 app.get('/api/sensors', function(req, res){
-    res.status(200).send('this is not implemented now');
+    return SensorsModel.find(function(err, sensors){
+        if(!err){
+            return res.send(sensors);
+        } else {
+            res.statusCode = 500;
+            log.error('Internal error(%d) : %s', res.statusCode, err.message);
+            return res.send({ error: 'Server error'});
+        }
+    });
+
+    //status(200).send('this is not implemented now');
 });
 app.post('/api/sensors', function(req, res){
-    res.status(200).send('this is not implemented now');
+    var sensor = new SensorsModel({
+        room: req.body.room,
+        sensor: req.body.sensor,
+        value: req.body.value
+    });
+
+    sensor.save(function (err) {
+        if (!err) {
+            log.info('sensor data saved');
+            return res.status(200).send('OK');
+        } else {
+            console.log(err);
+            if (err.name == 'ValidationError') {
+                res.status(400).send( { error: 'Validation error'});
+            } else {
+                res.status(500).send({ error: 'Server error'});
+            }
+            log.error('Internal error(%d) : %s', res.statusCode, err.message);
+        }
+
+    });
+
+    //res.status(200).send('this is not implemented now');
 });
+
+
 app.get('/api/sensors/:id', function(req, res){
     res.status(200).send('this is not implemented now');
 });
@@ -78,8 +95,29 @@ app.post('/test', function(req, res){
     log.info(data);
     res.status(200).send('Post test');
 });
-// Когнец пробных обработчиков
+// Конец пробных обработчиков
 
+
+//обработка ошибок
+app.use(function(req, res,next){
+    res.status(404);
+    log.debug('Not found url: %s', req.url);
+    res.send({error: 'Not found'});
+    return;
+
+});
+
+app.use(function(err, req, res,next){
+    res.status(err.status || 500);
+    log.error('Internal error(%d): %s', res.statusCode, err.message);
+    res.send({error: err.message});
+    return;
+});
+
+app.get('ErrorExample', function(req, res, next){
+    next(new Error('Random error'));
+});
+// конец обработки ошибок
 // запускаем сервер
 app.listen(config.get('port'), function(){
     log.info('Server rinning on port ' + config.get('port'));

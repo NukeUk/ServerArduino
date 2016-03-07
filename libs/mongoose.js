@@ -23,7 +23,7 @@ var Schema = mongoose.Schema;
 var Weather = new Schema({
     room: { type: String, required: true},
     sensor: { type: String, required: true },
-    value: { type: Float, required: true},
+    value: { type: Number, required: true},
     mDate: { type: Date, default: Date.now}
 });
 
