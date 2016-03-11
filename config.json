@@ -1,7 +1,7 @@
 {
   "port" : 3000,
   "mongoose" : {
-    "uri" : "mongodb://95.28.87.133:24014/sensors"
+    "uri" : "mongodb://192.168.1.38:27017/sensors"
   }
 
 }

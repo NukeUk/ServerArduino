@@ -39,7 +39,23 @@ app.get('/api/sensors', function(req, res){
     });
 
     //status(200).send('this is not implemented now');
+
 });
+
+app.get('/api/sensors/temperature', function(req, res){
+    return SensorsModel.aggregate({ $match: { 'room' : 'room1', 'sensor' : 'temperature' }, $project: {sensor: true, value: true}}, function(err, sensors){
+        if(!err){
+            return res.send(sensors);
+        } else {
+            res.statusCode = 500;
+            log.error('Internal error(%d) : %s', res.statusCode, err.message);
+            return res.send({ error: 'Server error'});
+        }
+    });
+
+    //status(200).send('this is not implemented now');
+});
+
 app.post('/api/sensors', function(req, res){
     var sensor = new SensorsModel({
         room: req.body.room,
